@@ -202,4 +202,14 @@ public class PessoaController {
                 .map(updatePessoa -> ResponseEntity.ok(updatePessoa))
                 .defaultIfEmpty(ResponseEntity.notFound().build());
     }
+    // https://localhost:8080/pessoa/fullsearch?nome=maria
+    // https://localhost:8080/pessoa/fullsearch?nome=maria&?cpf=6452545225888
+    @RequestMapping(value="/fullsearch", method=RequestMethod.GET)
+    public ResponseEntity<Flux<Pessoa>> fullSearch(
+            @RequestParam(value="nome", defaultValue="") String nome,
+            @RequestParam(value="cpf", defaultValue="") String cpf)
+    {
+        Flux<Pessoa> list = pessoaRepository.fullSearch(nome, cpf);
+        return ResponseEntity.ok().body(list);
+    }
 }
