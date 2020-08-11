@@ -207,9 +207,21 @@ public class PessoaController {
     @RequestMapping(value="/fullsearch", method=RequestMethod.GET)
     public ResponseEntity<Flux<Pessoa>> fullSearch(
             @RequestParam(value="nome", defaultValue="") String nome,
-            @RequestParam(value="cpf", defaultValue="") String cpf)
+            @RequestParam(value="cpf", defaultValue="") String cpf,
+            @RequestParam(value="email", defaultValue="") String email,
+            @RequestParam(value="telefone", defaultValue="") String telefone,
+            @RequestParam(value="cep", defaultValue="") String cep,
+            @RequestParam(value="sus", defaultValue="") String sus,
+            @RequestParam(value="mae", defaultValue="") String mae,
+            @RequestParam(value="crm", defaultValue="") String crm,
+            @RequestParam(value="matricula", defaultValue="") String matricula,
+            @RequestParam(value="profissao", defaultValue="") String profissao,
+            @RequestParam(value="sexo", defaultValue="") String sexo,
+            @RequestParam(value="pai", defaultValue="") String pai
+    )
     {
-        Flux<Pessoa> list = pessoaRepository.fullSearch(nome, cpf);
+        Flux<Pessoa> list = pessoaRepository.fullSearch(nome, cpf, email, telefone, cep,
+                sus, mae, crm, matricula, profissao, sexo, pai);
         return ResponseEntity.ok().body(list);
     }
 }
